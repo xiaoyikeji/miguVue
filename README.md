@@ -3,4 +3,5 @@
 1![image](https://github.com/xiaoyikeji/vueMusic/blob/master/src/imge/QQ%E5%9B%BE%E7%89%8720181128221826.png)
 1![image](https://github.com/xiaoyikeji/vueMusic/blob/master/src/imge/QQ%E5%9B%BE%E7%89%8720181204222949.png)
 1![image](https://github.com/xiaoyikeji/vueMusic/blob/master/src/imge/QQ%E5%9B%BE%E7%89%8720181204222910.png)
+1![image](https://github.com/xiaoyikeji/miguVue/blob/master/src/imge/QQ%E5%9B%BE%E7%89%8720181128221739.png)
 
