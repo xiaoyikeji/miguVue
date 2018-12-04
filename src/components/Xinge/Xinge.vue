@@ -3,7 +3,7 @@
   <div class="block">
     <div class="lunbo">
       <el-carousel :interval="5000" arrow="always"  >
-        <el-carousel-item v-for="items in gedanList" class="el-carousel__container">
+        <el-carousel-item v-for="items in songsList" class="el-carousel__container">
           <img class="X_B_img" :src="items.linkData.linkPicUrl" />
         </el-carousel-item>
       </el-carousel>
@@ -28,8 +28,8 @@
           </ul>
         </div>
         <div class="X_B_ul_pp_t" ref="wrapper">
-          <div class="X_B_ul_pp_li"  v-if="gedanList" >
-            <div  class="X_B_ul_pp_li_div" v-for="items in gedanList" @click="ToplayList(items.linkData.linkUrl.substring(items.linkData.linkUrl.length-9,items.linkData.linkUrl.length),items.linkData.linkPicUrl)">
+          <div class="X_B_ul_pp_li"  v-if="songsList" >
+            <div  class="X_B_ul_pp_li_div" v-for="items in songsList" @click="ToplayList(items.linkData.linkUrl.substring(items.linkData.linkUrl.length-9,items.linkData.linkUrl.length),items.linkData.linkPicUrl)">
               <img :src="items.linkData.linkPicUrl" alt="">
               <p>{{items.linkData.linkTitle}}</p>
               <p>{{items.linkData.linkDes.substring(0,12)}}</p>
@@ -51,6 +51,7 @@
   import BScroll from 'better-scroll'
   import Tabs from '@/components/tabs/tabs.vue'
   import Playing from '@/components/playing/Playing'
+  import { mapState ,mapGetters} from 'vuex'
 export default {
   components: {
     Tabs,
@@ -66,26 +67,19 @@ export default {
          songName:""
     }
   },
-  async created(){
+  watch:{
+    G_songList:function(){
+      console.log(this.G_songList)
+      return G_songList
+    }
+  },
+  created(){
 //      this.migu()
-    await this.axios.get('/api/?json=true').then((data)=>{
-      this.xinGe=  data.data.banner
-       this.GeMing=data.data.data
-       console.log(data)
-
-    })
-    await this.axios.get('/api/plist/index?pagesize=200&json=true').then((data)=>{
-      this.PaiHang=data.data
-      console.log(this.PaiHang)
-
-    })
-     this.axios.get('/m/migu/remoting/cms_list_tag?pageSize=10&nid=23853969&pageNo=0&type=2006').then((data)=>{
-      this.gedanList = data.data.result.results
-      console.log( this.gedanList)
-    })
+     this.$store.dispatch('AsongList')
     if(this.GeMing!=null){
       this.$nextTick(()=>{
         this._initScroll();
+        console.log(this.songsList)
       })
     }
   },
@@ -106,8 +100,13 @@ export default {
     },
     ToplayList(specialid,linkData){
         this.$router.push({name:'Playlist', params:{specialid:specialid,linkData:linkData}})
-    }
-  }
+    },
+  },
+  computed:{
+    ...mapState([
+      'songsList'
+    ]),
+  },
 }
 </script>
 <style scoped>

@@ -11,11 +11,11 @@
             <img  :src="img">
           </div>
         </div>
-        <Scroll class="playlist_list" :data="datlist" :probe-type="probeType">
+        <Scroll class="playlist_list" :data="songsListdate" :probe-type="probeType">
            <div >
              <div>
                <ul>
-                 <li v-for="items in datlist" @click="todoPalying(items)">
+                 <li v-for="items in songsListdate" @click="todoPalying(items)">
                    <div>
                      <p>{{items.contentName}}</p>
                      <p>{{items.singerName}}</p>
@@ -23,7 +23,7 @@
                  </li>
                </ul>
              </div>
-             <div v-if="!datlist" >
+             <div v-if="!songsListdate" >
                <h3 style="font-size: 1rem;margin:auto 30%;color: #ff6cba ">no-Songs</h3>
              </div>
            </div>
@@ -37,6 +37,7 @@
 <script>
   import {MGeshou} from '../api'
   import Scroll from '../../basics/betterScroll/scroll'
+  import { mapState ,mapGetters} from 'vuex'
 export default {
   data () {
     return {
@@ -49,21 +50,27 @@ export default {
   components: {
     Scroll
   },
+  watch:{
+
+  },
+  computed:{
+    ...mapState([
+      'songsListdate'
+    ]),
+  },
   created(){
       this.singerList=this.$route.params.specialid
-      this.songdata()
+      this.datalist()
 
   },
   methods:{
-       songdata(){
-           const  data = MGeshou(this.$route.params.specialid).then((da)=>{
-             console.log(da.contentList)
-             this.datlist=da.contentList
-           })
-       },
-       todoPalying(items){
+      todoPalying(items){
            console.log(items)
            this.$router.push({path:`/Playlist/${items.contentId}`,params:{id:items.contentId}})
+      },
+      datalist(){
+        var id=this.$route.params.specialid
+        this.$store.dispatch('AsongListData',id)
       }
 
   }

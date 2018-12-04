@@ -12,7 +12,6 @@ import Playlist from '@/components/Playlist/Playlist'
 import Playing from '@/components/Playing/Playing'
 import Songs from '@/components/Songs/Songs'
 import Personal from '@/components/Personal/Personal'
-import mm from '@/components/mm/mm'
 
 Vue.use(Router)
 
@@ -47,7 +46,14 @@ export default new Router({
     {
       path: '/Mymusic',
       name: 'Mymusic',
-      component: Mymusic
+      component: Mymusic,
+      children:[
+        {
+          path: '/Mymusic/:id',
+          component:Playing
+        }
+
+      ]
     },
     {
       path: '/Playlist',
@@ -70,13 +76,6 @@ export default new Router({
       path: '/Songs',
       name: 'Songs',
       component: Songs,
-      // children: [
-      //   {
-      //     path: '/Songs/:id',
-      //     component:Playing
-      //   }
-      //
-      // ]
     },
     {
       path: '/Personal',
@@ -87,7 +86,13 @@ export default new Router({
       path: '/Gedan',
       name: 'Gedan',
       component: Gedan
+    },
+    {
+      path: '/Playing',
+      name: 'Playing',
+      component: Playing
     }
+
 
   ]
 })

@@ -31,9 +31,6 @@ export const MGSousuo = (index)=>ajax(`/m/migu/remoting/scr_search_tag?rows=20&t
 //  歌手列表  http://m.music.migu.cn/migu/remoting/cms_list_tag?nid=23604008&pageSize=200&pageNo=0&type=2002
 export const MGXinge = (index)=>ajax(`/m/migu/remoting/cms_list_tag?nid=23604008&pageSize=200&pageNo=0&type=2002`)
 // http://m.music.migu.cn/migu/remoting/cms_detail_tag?pid=600908000009490257
-// http://m.music.migu.cn/migu/remoting/cms_detail_tag?pid=600902000009048674
-// http://m.music.migu.cn/migu/remoting/cms_detail_tag?pid=600908000002379650
-// http://m.music.migu.cn/migu/remoting/playlistcontents_query_tag?playListType=2&playListId=20130320&contentCount=20
 export const palying = (id)=>ajax(`/m/migu/remoting/cms_detail_tag?pid=${id}`)
 
 

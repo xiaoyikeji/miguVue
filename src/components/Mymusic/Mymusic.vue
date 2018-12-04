@@ -1,48 +1,60 @@
 <template>
-  <div class="hello">
-    <div class="Pahang">
-      <div class="Pahang_div">
+  <div>
+    <div class="hello">
+      <div class="Pahang">
+        <div class="Pahang_div">
             <span class="Pahang_back" @click="$router.back()">
               <img src="../Paihang/imges/back.png" alt="">
             </span>
-        <span class="Pahang_P">
+          <span class="Pahang_P">
                <p>MyMusic</p>
             </span>
-        <span class="Pahang_fen">
+          <span class="Pahang_fen">
               <img src="../Paihang/imges/xiala.png" alt="">
             </span>
+        </div>
       </div>
-    </div>
-    <div class="Songs_tabs">
-      <ul>
-        <li><div ><span >最爱</span></div></li>
-        <li><div><span>收藏</span></div></li>
-        <li><div><span>随声听</span></div></li>
-      </ul>
-    </div>
-    <div class="Songs_body">
-      <div class="Songs_body_div">
-        <div class="Songs_body_A">
-          <ul class="Songs_body_AUL">
-            <!--<li class="Songs_body_AULI" v-for="items in 8">-->
-              <!--<div class="Songs_body_AULI_a">-->
-                <!--<img src="https://cdn.dribbble.com/users/912872/screenshots/4186388/dri_teaser.png" alt="">-->
-              <!--</div>-->
-              <!--<div class="Songs_body_AULI_b">-->
-                <!--<h4>喜欢你</h4>-->
-                <!--<p>黄家驹《beyond》</p>-->
-              <!--</div>-->
-              <!--<div class="Songs_body_AULI_c">-->
-                <!--<span><img src="../Songs/imgs/xingShi.png" alt="">BonusTrack</span>-->
-              <!--</div>-->
-            <!--</li>-->
-          </ul>
+      <div class="Songs_tabs">
+        <ul>
+          <li><div ><span >最爱</span></div></li>
+          <li><div><span>收藏</span></div></li>
+          <li><div><span>随声听</span></div></li>
+        </ul>
+      </div>
+      <div class="Songs_body">
+        <div class="Songs_body_div">
+          <div class="Songs_body_A">
+            <Scroll class="playlist_list" :data="G_xihuan" :probe-type="probeType" >
+              <div >
+                <div>
+                  <ul>
+                    <li class="Songs_body_AULI" v-for="items in G_xihuan" @click="TZpliay(items)">
+                      <div class="Songs_body_AULI_a">
+                        <img :src="items.picL" alt="">
+                      </div>
+                      <div class="Songs_body_AULI_b">
+                        <h4>{{items.songName}}</h4>
+                        <p>{{items.singerName[0]}}</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div >
+                  <h3 style="font-size: 1rem;margin:auto 30%;color: #ff6cba ">no-Songs</h3>
+                </div>
+              </div>
+            </Scroll >
+          </div>
         </div>
       </div>
     </div>
+    <router-view/>
   </div>
+
 </template>
 <script>
+  import Scroll from '../../basics/betterScroll/scroll'
+  import { mapState ,mapGetters} from 'vuex'
   export default {
 
     data () {
@@ -50,8 +62,21 @@
 
       }
     },
+    components:{
+      Scroll
+    },
+    computed:{
+      ...mapState([
+        'xihuan'
+      ]),
+      ...mapGetters([
+         'G_xihuan'
+      ])
+    },
     methods:{
-
+      TZpliay(items){
+        this.$router.push({path:`/Mymusic/${items.copyrightId}`})
+      }
     },
     created(){
 
@@ -59,6 +84,13 @@
   }
 </script>
 <style scoped>
+  .playlist_list{
+    width: 100%;
+    height: 84%;
+    position: fixed;
+    border-bottom: 0;
+    overflow: hidden;
+  }
   .active{
     box-shadow: 0 0 .5rem #f4f4f4;
     border-radius: 20%;
@@ -170,7 +202,7 @@
   .Songs_body_AULI_b{
     padding: .3rem;
     float: left;
-    font-size: .7rem;
+    font-size: .5rem;
   }
   .Songs_body_AULI_c{
     padding: .3rem;

@@ -1,4 +1,9 @@
 /**
- * Created by Administrator on 2018/11/2 0002.
+ * Created by zc on 2018/10/17.
  */
-export const SET_SINGER='SET_SINGER'
+export const SONGSLIST = 'SONGSLIST' //  接受地址
+export const SONGSLISTDATA = 'SONGSLISTDATA' //  接受地址 palyingList
+export const PALYINGLIST = 'PALYINGLIST' //  接受地址 palyingList
+
+
+

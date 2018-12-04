@@ -5,12 +5,14 @@
          <!--<span class="bar_right el-icon-search">搜索</span>-->
     <!--</div>-->
     <Tabs class="tbas"></Tabs>
+    <Playing v-show="false"></Playing>
     <router-view/>
   </div>
 </template>
 
 <script>
   import Tabs from '@/components/tabs/tabs.vue'
+  import Playing from '@/components/playing/Playing'
 export default {
     data(){
       return{
@@ -18,7 +20,8 @@ export default {
       }
     } ,
   components: {
-    Tabs
+    Tabs,
+    Playing
   },
   created(){
 

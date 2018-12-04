@@ -1,7 +1,15 @@
 /**
- * Created by Administrator on 2018/11/2 0002.
+ * Created by zc on 2018/10/17.
  */
 export default {
-       playListId:0,
-       singer:{}
+  login: false,   // 是否登录
+  songsList:[],
+  songsListdate:[],
+  zuiai:[],
+  shoucang:[],
+  suishengting:[],
+  danSong:[],
+  xihuan:[],
+  danSonggeci:[]
 }
+
